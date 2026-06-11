@@ -98,64 +98,20 @@ select:focus-visible,
   outline-offset: 3px;
 }
 
-/* Fix mobile scroll janky / putih pas scroll cepat */
-html,
-body {
-  background-color: #101018;
-  overscroll-behavior-y: none;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (max-width: 640px) {
-  html {
-    scroll-behavior: auto;
-    background: #101018;
-  }
-
-  body {
-    background:
-      radial-gradient(circle at top left, rgba(255, 138, 101, 0.12), transparent 24rem),
-      radial-gradient(circle at top right, rgba(142, 167, 255, 0.10), transparent 22rem),
-      linear-gradient(135deg, #0e0e16 0%, #151627 48%, #0f1720 100%);
-    background-color: #101018;
-    overflow-x: hidden;
-    overscroll-behavior-y: none;
-  }
-
-  .app-shell {
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  .orb {
-    position: absolute;
-    filter: blur(10px);
-    opacity: 0.25;
-    animation: none;
-  }
-
-  .glass-card,
-  .stat-card {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    background: rgba(24, 25, 41, 0.94);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
-  }
-
-  .primary-card {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 138, 101, 0.96),
-      rgba(255, 184, 107, 0.9)
-    );
-  }
-
-  .stat-card::after {
-    opacity: 0.55;
-  }
-
-  .transaction-list {
-    -webkit-overflow-scrolling: touch;
-  }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Quicksand', system-ui, sans-serif;
+  color: var(--text-dark);
+  background:
+    radial-gradient(circle at top left, rgba(255, 138, 101, 0.18), transparent 34rem),
+    radial-gradient(circle at top right, rgba(142, 167, 255, 0.16), transparent 32rem),
+    linear-gradient(135deg, #0e0e16 0%, #151627 48%, #0f1720 100%);
+  overflow-x: hidden;
 }
 
 button,
@@ -653,9 +609,11 @@ input[type="month"] {
   z-index: 2;
 }
 
+/* Saat dropdown dibuka, form naik ke layer paling atas supaya popup nggak ketimpa card lain. */
 .form-card:has(.custom-select.open) {
   z-index: 100;
 }
+
 
 .form-card.dropdown-active {
   z-index: 100;
@@ -778,6 +736,8 @@ input[type="month"] {
   pointer-events: none;
   transition: opacity 0.22s ease, transform 0.22s ease;
   z-index: 9999;
+
+  /* Yang kelihatan kira-kira 6 pilihan, sisanya scroll di dalam popup. */
   max-height: 304px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -1189,5 +1149,65 @@ input[type="month"] {
 
   .modal-btn {
     width: 100%;
+  }
+}
+
+/* Fix mobile scroll janky / putih pas scroll cepat */
+html,
+body {
+  background-color: #101018;
+  overscroll-behavior-y: none;
+}
+
+@media (max-width: 640px) {
+  html {
+    scroll-behavior: auto;
+    background: #101018;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at top left, rgba(255, 138, 101, 0.12), transparent 24rem),
+      radial-gradient(circle at top right, rgba(142, 167, 255, 0.10), transparent 22rem),
+      linear-gradient(135deg, #0e0e16 0%, #151627 48%, #0f1720 100%);
+    background-color: #101018;
+    overflow-x: hidden;
+    overscroll-behavior-y: none;
+  }
+
+  .app-shell {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .orb {
+    position: absolute;
+    filter: blur(10px);
+    opacity: 0.25;
+    animation: none;
+  }
+
+  .glass-card,
+  .stat-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(24, 25, 41, 0.94);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  }
+
+  .primary-card {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 138, 101, 0.96),
+      rgba(255, 184, 107, 0.9)
+    );
+  }
+
+  .stat-card::after {
+    opacity: 0.55;
+  }
+
+  .transaction-list {
+    -webkit-overflow-scrolling: touch;
   }
 }
