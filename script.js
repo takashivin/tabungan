@@ -1,14 +1,9 @@
-// DJI Pocket Savings Tracker v7
-// Mode cloud TANPA LOGIN EMAIL: isi supabaseUrl, supabaseAnonKey, dan vaultKey di CONFIG.
-// Catatan: karena ini GitHub Pages/static frontend, vaultKey di script.js bisa dilihat orang kalau repo/site publik.
-// Untuk data yang benar-benar sensitif, login Supabase tetap lebih aman.
-
 const CONFIG = {
   targetAmount: 8100000,
   monthlySaving: 500000,
   supabaseUrl: "https://ggjmxzeuzcrkobfzkhgy.supabase.co",
   supabaseAnonKey: "sb_publishable_-j4pRJs6YWWFfNG7shEeEg_zb5wGzZX",
-  vaultKey: "djiosmopocket4-301458"
+  vaultKey: "djiosmopocket4"
 };
 
 const categoryOptions = [
