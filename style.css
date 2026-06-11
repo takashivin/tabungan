@@ -20,6 +20,82 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input,
+textarea,
+select,
+label,
+.custom-select-trigger,
+.custom-option,
+.magic-btn,
+.submit-btn,
+.delete-btn,
+.ghost-btn,
+.import-label,
+.backup-actions button,
+.modal-btn,
+.type-toggle button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+button,
+a,
+input,
+textarea,
+select,
+.custom-select-trigger,
+.custom-option,
+.magic-btn,
+.submit-btn,
+.delete-btn,
+.ghost-btn,
+.import-label,
+.backup-actions button,
+.modal-btn,
+.type-toggle button {
+  outline: none;
+}
+
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.custom-select-trigger:focus,
+.custom-option:focus,
+.magic-btn:focus,
+.submit-btn:focus,
+.delete-btn:focus,
+.ghost-btn:focus,
+.import-label:focus,
+.backup-actions button:focus,
+.modal-btn:focus,
+.type-toggle button:focus {
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.custom-select-trigger:focus-visible,
+.custom-option:focus-visible,
+.magic-btn:focus-visible,
+.submit-btn:focus-visible,
+.delete-btn:focus-visible,
+.ghost-btn:focus-visible,
+.import-label:focus-visible,
+.backup-actions button:focus-visible,
+.modal-btn:focus-visible,
+.type-toggle button:focus-visible {
+  outline: 2px solid rgba(255, 184, 107, 0.75);
+  outline-offset: 3px;
 }
 
 html {
@@ -533,11 +609,9 @@ input[type="month"] {
   z-index: 2;
 }
 
-/* Saat dropdown dibuka, form naik ke layer paling atas supaya popup nggak ketimpa card lain. */
 .form-card:has(.custom-select.open) {
   z-index: 100;
 }
-
 
 .form-card.dropdown-active {
   z-index: 100;
@@ -660,8 +734,6 @@ input[type="month"] {
   pointer-events: none;
   transition: opacity 0.22s ease, transform 0.22s ease;
   z-index: 9999;
-
-  /* Yang kelihatan kira-kira 6 pilihan, sisanya scroll di dalam popup. */
   max-height: 304px;
   overflow-y: auto;
   overscroll-behavior: contain;
