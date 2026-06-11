@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJI Pocket Savings Tracker</title>
+  <meta name="description" content="Tracker pemasukan, pengeluaran, dan progress tabungan DJI Pocket." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+  <div class="orb orb-three"></div>
+
+  <main class="app-shell">
+    <header class="hero-card glass-card">
+      <div>
+        <p class="eyebrow"><i class="fa-solid fa-camera-retro"></i> Wishlist 2 tahun</p>
+        <h1>DJI Pocket Savings</h1>
+        <p class="hero-desc">Catat pemasukan, pengeluaran, dan progress tabungan menuju <strong>Rp8.100.000</strong>.</p>
+      </div>
+      <div class="hero-actions">
+        <span id="syncBadge" class="sync-badge local"><i class="fa-solid fa-database"></i> Mode lokal</span>
+        <button id="logoutBtn" class="ghost-btn hidden" type="button"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+      </div>
+    </header>
+
+    <!-- Cloud sync sekarang otomatis tanpa login email. Isi CONFIG di script.js. -->
+
+    <section class="summary-grid">
+      <article class="stat-card primary-card">
+        <span class="stat-icon"><i class="fa-solid fa-wallet"></i></span>
+        <p>Total Tabungan</p>
+        <h2 id="totalSavings">Rp0</h2>
+        <span id="savingStatus" class="mini-pill">Mulai dari Rp0 juga gapapa</span>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon green"><i class="fa-solid fa-arrow-trend-up"></i></span>
+        <p>Total Pemasukan</p>
+        <h2 id="totalIncome">Rp0</h2>
+        <span>Semua pemasukan tercatat</span>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon red"><i class="fa-solid fa-arrow-trend-down"></i></span>
+        <p>Total Pengeluaran</p>
+        <h2 id="totalExpense">Rp0</h2>
+        <span>Jajan, transport, skincare, dll</span>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon purple"><i class="fa-solid fa-calendar-check"></i></span>
+        <p>Estimasi Selesai</p>
+        <h2 id="finishEstimate">-</h2>
+        <span id="monthsLeftText">Nabung Rp500.000/bulan</span>
+      </article>
+    </section>
+
+    <section class="progress-card glass-card">
+      <div class="progress-top">
+        <div>
+          <p class="section-kicker">Progress ke target</p>
+          <h2 id="progressTitle">0% menuju DJI Osmo Pocket 4</h2>
+        </div>
+        <span id="remainingText" class="remaining-pill">Sisa Rp8.100.000</span>
+      </div>
+      <div class="progress-bar" aria-label="progress tabungan">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <div class="progress-meta">
+        <span>Rp0</span>
+        <span>Target Rp8.100.000</span>
+      </div>
+    </section>
+
+    <section class="tools-grid">
+      <form id="transactionForm" class="form-card glass-card" autocomplete="off">
+        <div class="form-head">
+          <div>
+            <p class="section-kicker">Tambah catatan</p>
+            <h2 id="formTitle">Pemasukan baru</h2>
+          </div>
+          <div class="type-toggle income-selected" role="tablist" aria-label="Pilih tipe transaksi">
+            <button class="active" data-type="income" type="button"><i class="fa-solid fa-plus"></i> Pemasukan</button>
+            <button data-type="expense" type="button"><i class="fa-solid fa-minus"></i> Pengeluaran</button>
+          </div>
+        </div>
+
+        <label>
+          Tanggal
+          <input id="trxDate" name="trx_date_custom" type="date" autocomplete="off" required>
+        </label>
+
+        <label>
+          Judul
+          <input id="trxTitle" name="trx_title_custom" type="text" placeholder="contoh: Makan bersama" maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+        </label>
+
+        <label>
+          Kategori
+          <div id="trxCategorySelect" class="custom-select">
+            <button id="trxCategoryTrigger" class="custom-select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+              <span id="trxCategoryLabel">Pilih kategori</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div id="trxCategoryMenu" class="custom-select-menu" role="listbox" aria-label="Pilih kategori"></div>
+            <input id="trxCategory" type="hidden" name="trx_category_custom">
+          </div>
+        </label>
+
+        <label>
+          Nominal
+          <input id="trxAmount" name="trx_amount_custom" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="contoh: Rp500.000" required>
+        </label>
+
+        <button id="submitBtn" class="submit-btn" type="submit"><i class="fa-solid fa-floppy-disk"></i> Simpan pemasukan</button>
+        <p id="formMessage" class="small-note"></p>
+      </form>
+
+      <aside class="month-card glass-card">
+        <div class="month-head">
+          <div>
+            <p class="section-kicker">Ringkasan bulan</p>
+            <h2 id="monthTitle">Bulan ini</h2>
+          </div>
+          <input id="monthFilter" name="month_filter_custom" type="month" autocomplete="off">
+        </div>
+
+        <div class="month-numbers">
+          <div>
+            <span>Pemasukan</span>
+            <strong id="monthIncome">Rp0</strong>
+          </div>
+          <div>
+            <span>Pengeluaran</span>
+            <strong id="monthExpense">Rp0</strong>
+          </div>
+          <div>
+            <span>Sisa bulan ini</span>
+            <strong id="monthBalance">Rp0</strong>
+          </div>
+        </div>
+
+        <div class="monthly-goal">
+          <div>
+            <span>Target nabung bulanan</span>
+            <strong>Rp500.000</strong>
+          </div>
+          <div class="mini-progress">
+            <div id="monthGoalFill"></div>
+          </div>
+          <p id="monthGoalText">Ayo mulai isi bulan ini.</p>
+        </div>
+
+        <div class="backup-actions">
+          <button id="exportBtn" type="button"><i class="fa-solid fa-file-export"></i> Export JSON</button>
+          <label class="import-label">
+            <i class="fa-solid fa-file-import"></i> Import JSON
+            <input id="importInput" type="file" accept="application/json">
+          </label>
+        </div>
+      </aside>
+    </section>
+
+    <section class="list-grid">
+      <article class="list-card glass-card">
+        <div class="list-head">
+          <h2><i class="fa-solid fa-circle-plus"></i> Pemasukan</h2>
+          <span id="incomeCount">0 catatan</span>
+        </div>
+        <div id="incomeList" class="transaction-list empty-list"></div>
+      </article>
+
+      <article class="list-card glass-card">
+        <div class="list-head">
+          <h2><i class="fa-solid fa-circle-minus"></i> Pengeluaran</h2>
+          <span id="expenseCount">0 catatan</span>
+        </div>
+        <div id="expenseList" class="transaction-list empty-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="confirmModal" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmText">
+      <div class="modal-badge"><i class="fa-solid fa-trash"></i></div>
+      <h3 id="confirmTitle">Hapus catatan?</h3>
+      <p id="confirmText">Catatan ini akan dihapus permanen.</p>
+      <div class="modal-actions">
+        <button id="confirmCancel" class="modal-btn ghost" type="button">Batal</button>
+        <button id="confirmOk" class="modal-btn danger" type="button">Hapus</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
