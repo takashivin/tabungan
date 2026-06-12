@@ -18,11 +18,10 @@
 
 ## Preview
 
-> Tambahkan screenshot website kamu di sini.
 
-```md
+
 ![Preview DJI Pocket Savings Tracker](./preview.png)
-```
+
 
 ---
 
@@ -379,5 +378,5 @@ Jika ingin memakai ulang, jangan lupa kasih credit ya.
 ---
 
 <p align="center">
-  Dibuat untuk bantu nabung pelan-pelan sampai wishlist kebeli.
+  Dibuat untuk bantu nabung pelan-pelan sampai wishlist kebeli. :D
 </p>
