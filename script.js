@@ -8,12 +8,15 @@ const CONFIG = {
 
 const categoryOptions = [
   "Uang Bulanan",
-  "Tabungan DJI",
+  "Tabungan",
   "Makan & Jajan",
   "Transportasi",
-  "Skincare",
+  "Kebutuhan Sekolah",
+  "Pulsa & Internet",
+  "Topup e-Wallet",
   "Hiburan",
-  "Topup Apupan",
+  "Kesehatan",
+  "Skincare",
   "Tarik Tunai",
   "Lainnya"
 ];

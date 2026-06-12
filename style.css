@@ -891,6 +891,25 @@ input[type="month"] {
   font-weight: 800;
 }
 
+#exportBtn,
+.import-label {
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  font-family: 'Quicksand', system-ui, sans-serif !important;
+}
+
+#exportBtn i,
+.import-label > i {
+  font-size: 1.05rem !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 .backup-actions button:hover,
 .import-label:hover,
 .ghost-btn:hover {
