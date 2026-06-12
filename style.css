@@ -1393,3 +1393,43 @@ body {
     overflow-y: visible;
   }
 }
+
+/* V11 fix: form Tambah Catatan jangan jadi area scroll.
+   Yang boleh scroll cuma popup kategori. */
+#transactionForm,
+.form-card,
+.form-card.glass-card,
+.tools-grid,
+.custom-select {
+  overflow: visible !important;
+  max-height: none !important;
+}
+
+#transactionForm {
+  touch-action: auto;
+}
+
+.custom-select-menu {
+  max-height: 304px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 640px) {
+  #transactionForm,
+  .form-card,
+  .form-card.glass-card,
+  .tools-grid,
+  .custom-select {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+
+  .custom-select-menu {
+    max-height: 258px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+}
