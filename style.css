@@ -1433,3 +1433,52 @@ body {
     overflow-x: hidden !important;
   }
 }
+
+/* V12: anti select / anti long press / anti drag di HP */
+html,
+body {
+  -webkit-touch-callout: none;
+}
+
+body,
+body *:not(input):not(textarea) {
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+img,
+svg,
+canvas,
+video,
+.stat-icon,
+.orb {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+button,
+a,
+.custom-select-trigger,
+.custom-option,
+.delete-btn,
+.submit-btn,
+.magic-btn,
+.ghost-btn,
+.import-label,
+.backup-actions button,
+.modal-btn,
+.type-toggle button {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Input tetap bisa diketik, tapi tap highlight biru tetap hilang */
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
