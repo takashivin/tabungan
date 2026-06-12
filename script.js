@@ -14,6 +14,7 @@ const categoryOptions = [
   "Kebutuhan Sekolah",
   "Pulsa & Internet",
   "Topup e-Wallet",
+  "Langganan Aplikas",
   "Hiburan",
   "Kesehatan",
   "Skincare",
