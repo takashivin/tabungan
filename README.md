@@ -109,8 +109,8 @@ const categoryOptions = [
 Clone repository:
 
 ```bash
-git clone https://github.com/USERNAME/NAMA_REPOSITORY.git
-cd NAMA_REPOSITORY
+git clone https://github.com/takashivin/tabungan.git
+cd tabungan
 ```
 
 Lalu buka file:
