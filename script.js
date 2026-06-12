@@ -13,7 +13,7 @@ const categoryOptions = [
   "Transportasi",
   "Skincare",
   "Hiburan",
-  "Topup e-Money",
+  "Topup Apupan",
   "Tarik Tunai",
   "Lainnya"
 ];
