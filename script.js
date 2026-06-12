@@ -582,4 +582,26 @@ async function importData(event) {
   }
 }
 
+function updateTimeCounter() {
+  const timeCounter = document.querySelector("#timeCounter");
+  if (!timeCounter) return;
+
+  const startDate = new Date("2026-06-01T00:00:00+07:00");
+  const now = new Date();
+
+  const totalHours = Math.max(
+    0,
+    Math.floor((now - startDate) / (1000 * 60 * 60))
+  );
+
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+
+  timeCounter.textContent = `${days} hari ${hours} jam`;
+}
+
+init();
+updateTimeCounter();
+setInterval(updateTimeCounter, 1000 * 60);
+
 init();
