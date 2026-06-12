@@ -428,7 +428,7 @@ function renderAll() {
   el.savingStatus.textContent = totalSavings <= 0
     ? "Mulai dari Rp0 juga gapapa"
     : totalSavings >= CONFIG.targetAmount
-      ? "Uhee, targetnya kebeli nih"
+      ? "Ciee, Wishlistnya kebeli nih"
       : `${formatRupiah(remaining)} lagi menuju target`;
 
   renderMonthSummary();
