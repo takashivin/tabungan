@@ -20,7 +20,7 @@
 
 
 
-![Preview DJI Pocket Savings Tracker](./preview.png)
+![Preview DJI Pocket Savings Tracker](./resources/preview.png)
 
 
 ---
