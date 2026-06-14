@@ -25,6 +25,7 @@ const categoryOptions = [
 const el = {
   syncBadge: document.querySelector("#syncBadge"),
   logoutBtn: document.querySelector("#logoutBtn"),
+  themeToggle: document.querySelector("#themeToggle"),
 
   totalSavings: document.querySelector("#totalSavings"),
   savingStatus: document.querySelector("#savingStatus"),
@@ -417,6 +418,7 @@ function renderAll() {
   el.totalExpense.textContent = formatRupiah(totalExpense);
   el.totalSavings.textContent = formatRupiah(totalSavings);
   el.progressFill.style.width = `${progress}%`;
+  el.progressFill.classList.toggle("has-progress", progress > 0);
   el.progressTitle.textContent = `${progress.toFixed(1)}% menuju DJI Osmo Pocket 4`;
   el.remainingText.textContent = remaining <= 0 ? "Target tercapai!" : `Sisa ${formatRupiah(remaining)}`;
   el.finishEstimate.textContent = remaining <= 0
@@ -455,6 +457,7 @@ function renderMonthSummary() {
   el.monthExpense.textContent = formatRupiah(expense);
   el.monthBalance.textContent = formatRupiah(balance);
   el.monthGoalFill.style.width = `${goalPercent}%`;
+  el.monthGoalFill.classList.toggle("has-progress", goalPercent > 0);
 
   if (balance >= CONFIG.monthlySaving) {
     el.monthGoalText.textContent = `Mantap. Bulan ini sudah lewat target nabung ${formatRupiah(CONFIG.monthlySaving)}.`;
@@ -582,6 +585,98 @@ async function importData(event) {
   }
 }
 
+const themeStorageKey = "tabungan-theme";
+
+function getDeviceTheme() {
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
+function clearSavedThemePreference() {
+  try {
+    localStorage.removeItem(themeStorageKey);
+  } catch (error) {
+    // localStorage bisa saja diblokir browser; tema tetap jalan.
+  }
+}
+
+function updateThemeButton(theme) {
+  if (!el.themeToggle) return;
+
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  el.themeToggle.setAttribute("aria-label", `Ganti ke ${nextTheme === "dark" ? "dark mode" : "light mode"}`);
+  el.themeToggle.title = `Ganti ke ${nextTheme === "dark" ? "dark mode" : "light mode"}`;
+}
+
+let themeChangeTimer = null;
+
+function getThemeBaseColor(theme) {
+  return theme === "light" ? "#f7f3ea" : "#101018";
+}
+
+function runThemeFade(fromTheme) {
+  // Transisi ringan: bukan animasi semua card, tapi overlay warna lama yang fade out.
+  // Jadi tetap terasa smooth, tapi tidak bikin repaint berat di HP/PC.
+  const oldLayer = document.querySelector(".theme-fade-layer");
+  if (oldLayer) oldLayer.remove();
+
+  const layer = document.createElement("div");
+  layer.className = "theme-fade-layer";
+  layer.style.background = getThemeBaseColor(fromTheme);
+  document.body.appendChild(layer);
+
+  requestAnimationFrame(() => {
+    layer.classList.add("is-leaving");
+  });
+
+  window.setTimeout(() => {
+    layer.remove();
+  }, 360);
+}
+
+function applyTheme(theme, shouldSave = false, withFade = false) {
+  const nextTheme = theme === "light" ? "light" : "dark";
+  const root = document.documentElement;
+  const currentTheme = root.dataset.theme === "light" ? "light" : "dark";
+
+  if (withFade && currentTheme !== nextTheme) {
+    runThemeFade(currentTheme);
+  }
+
+  // Matikan transisi besar sebentar saat warna UI diganti.
+  // Yang terlihat transisi cuma overlay halus + ikon tema.
+  root.classList.add("theme-changing");
+  root.dataset.theme = nextTheme;
+
+  clearTimeout(themeChangeTimer);
+  themeChangeTimer = setTimeout(() => {
+    root.classList.remove("theme-changing");
+  }, 90);
+
+  updateThemeButton(nextTheme);
+}
+
+function initTheme() {
+  clearSavedThemePreference();
+
+  const initialTheme = getDeviceTheme();
+  applyTheme(initialTheme, false);
+
+  if (el.themeToggle) {
+    el.themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+
+      // Toggle manual hanya berlaku selama halaman ini dibuka.
+      // Setelah refresh / buka ulang, tema balik ngikut device preference.
+      applyTheme(currentTheme === "dark" ? "light" : "dark", false, true);
+    });
+  }
+
+  const media = window.matchMedia("(prefers-color-scheme: light)");
+  media.addEventListener?.("change", (event) => {
+    applyTheme(event.matches ? "light" : "dark", false, true);
+  });
+}
+
 function updateTimeCounter() {
   const timeCounter = document.querySelector("#timeCounter");
   if (!timeCounter) return;
@@ -600,8 +695,7 @@ function updateTimeCounter() {
   timeCounter.textContent = `${days} hari ${hours} jam`;
 }
 
+initTheme();
 init();
 updateTimeCounter();
 setInterval(updateTimeCounter, 1000 * 60);
-
-init();

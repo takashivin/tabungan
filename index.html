@@ -9,6 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem("tabungan-theme");
+        const deviceTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = savedTheme || deviceTheme;
+      } catch (error) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/svg+xml" href="./resources/favicon.svg">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -27,6 +38,12 @@
         <p class="hero-desc">Catat pemasukan, pengeluaran, dan progress tabungan menuju <strong>Rp8.100.000</strong>.</p>
       </div>
       <div class="hero-actions">
+        <button id="themeToggle" class="theme-toggle-btn" type="button" aria-label="Ganti tema" title="Ganti tema">
+          <span class="theme-icon-wrap" aria-hidden="true">
+            <i class="fa-solid fa-moon theme-icon theme-icon-moon"></i>
+            <i class="fa-solid fa-sun theme-icon theme-icon-sun"></i>
+          </span>
+        </button>
         <span id="syncBadge" class="sync-badge local"><i class="fa-solid fa-database"></i> Mode lokal</span>
         <button id="logoutBtn" class="ghost-btn hidden" type="button"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
       </div>

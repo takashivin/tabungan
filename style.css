@@ -1501,3 +1501,484 @@ input,
 textarea {
   -webkit-tap-highlight-color: transparent;
 }
+
+
+/* Theme mode: satu tombol, transisi lembut biar tidak bikin mata capek */
+:root {
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-color: #f7f3ea;
+  --bg-soft: #fffaf2;
+  --primary: #f27d55;
+  --primary-2: #f6a85f;
+  --secondary: #6579d9;
+  --accent: #36a873;
+  --danger: #dc4d6d;
+  --purple: #8b6cd8;
+  --highlight: #fff4df;
+  --text-dark: #211c2e;
+  --text-muted: #6f6b80;
+  --card-border: rgba(50, 45, 70, 0.14);
+  --card-shadow: 0 18px 44px rgba(42, 36, 64, 0.12);
+  --glass: rgba(255, 255, 255, 0.76);
+  --glass-strong: rgba(255, 255, 255, 0.9);
+  --surface: rgba(35, 28, 54, 0.055);
+  --surface-2: rgba(35, 28, 54, 0.085);
+}
+
+/* Theme performance fix:
+   Jangan transisi semua card/input saat ganti tema.
+   Di HP/PC ini bisa bikin repaint berat karena glass, shadow, dan background gradient.
+   Yang dianimasikan cukup tombol + ikon tema saja. */
+.theme-toggle-btn {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+:root.theme-changing body,
+:root.theme-changing .glass-card,
+:root.theme-changing .stat-card,
+:root.theme-changing .sync-badge,
+:root.theme-changing .ghost-btn,
+:root.theme-changing .remaining-pill,
+:root.theme-changing .mini-pill,
+:root.theme-changing input,
+:root.theme-changing .custom-select-trigger,
+:root.theme-changing .custom-select-menu,
+:root.theme-changing .custom-option,
+:root.theme-changing .month-numbers div,
+:root.theme-changing .monthly-goal,
+:root.theme-changing .transaction-item,
+:root.theme-changing .empty-state,
+:root.theme-changing .modal-card,
+:root.theme-changing .modal-backdrop,
+:root.theme-changing .backup-actions button,
+:root.theme-changing .import-label {
+  transition: none !important;
+}
+
+:root[data-theme="light"] body {
+  color: var(--text-dark);
+  background-color: #f7f3ea;
+  background:
+    radial-gradient(circle at top left, rgba(255, 138, 101, 0.16), transparent 32rem),
+    radial-gradient(circle at top right, rgba(142, 167, 255, 0.12), transparent 30rem),
+    linear-gradient(135deg, #fff8ed 0%, #f5f1ff 52%, #eef8f2 100%);
+}
+
+:root[data-theme="light"] .orb-one {
+  background: rgba(255, 138, 101, 0.18);
+}
+
+:root[data-theme="light"] .orb-two {
+  background: rgba(54, 168, 115, 0.13);
+}
+
+:root[data-theme="light"] .orb-three {
+  background: rgba(101, 121, 217, 0.12);
+}
+
+.theme-toggle-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--primary-2);
+  box-shadow: none;
+  padding: 0;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.theme-icon-wrap {
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: inline-grid;
+  place-items: center;
+}
+
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  display: inline-grid;
+  place-items: center;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition:
+    opacity 140ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="dark"] .theme-icon-moon,
+:root:not([data-theme="light"]) .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="dark"] .theme-icon-sun,
+:root:not([data-theme="light"]) .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.45);
+}
+
+:root[data-theme="light"] .theme-icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.45);
+}
+
+:root[data-theme="light"] .theme-icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="light"] .theme-toggle-btn {
+  background: rgba(35, 28, 54, 0.055);
+  border-color: rgba(35, 28, 54, 0.12);
+  color: #d88924;
+}
+
+:root[data-theme="light"] .theme-toggle-btn:hover {
+  background: rgba(35, 28, 54, 0.09);
+}
+
+:root[data-theme="light"] .hero-actions {
+  padding-top: 44px;
+}
+
+:root:not([data-theme="light"]) .hero-actions,
+:root[data-theme="dark"] .hero-actions {
+  padding-top: 44px;
+}
+
+:root[data-theme="light"] .glass-card,
+:root[data-theme="light"] .stat-card {
+  background: var(--glass);
+  border-color: var(--card-border);
+  box-shadow: var(--card-shadow);
+}
+
+:root[data-theme="light"] .primary-card {
+  background: linear-gradient(135deg, rgba(255, 138, 101, 0.88), rgba(255, 184, 107, 0.78));
+  color: #24180f;
+}
+
+:root[data-theme="light"] .stat-card::after {
+  background: rgba(42, 36, 64, 0.045);
+}
+
+:root[data-theme="light"] .sync-badge,
+:root[data-theme="light"] .remaining-pill,
+:root[data-theme="light"] .mini-pill,
+:root[data-theme="light"] .ghost-btn,
+:root[data-theme="light"] .backup-actions button,
+:root[data-theme="light"] .import-label,
+:root[data-theme="light"] .month-numbers div,
+:root[data-theme="light"] .monthly-goal,
+:root[data-theme="light"] .transaction-item {
+  color: var(--text-dark);
+  background: rgba(35, 28, 54, 0.055);
+  border-color: rgba(35, 28, 54, 0.09);
+}
+
+:root[data-theme="light"] .sync-badge.cloud {
+  background: rgba(54, 168, 115, 0.16);
+  color: #1b6c48;
+  border-color: rgba(54, 168, 115, 0.18);
+}
+
+:root[data-theme="light"] input,
+:root[data-theme="light"] .custom-select-trigger {
+  color: var(--text-dark);
+  background: rgba(35, 28, 54, 0.055);
+  border-color: rgba(35, 28, 54, 0.11);
+}
+
+:root[data-theme="light"] input::placeholder {
+  color: rgba(33, 28, 46, 0.42);
+}
+
+:root[data-theme="light"] input[type="date"],
+:root[data-theme="light"] input[type="month"] {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] .custom-select-menu {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(35, 28, 54, 0.1);
+  box-shadow: 0 24px 44px rgba(42, 36, 64, 0.16);
+}
+
+:root[data-theme="light"] .custom-option {
+  color: var(--text-dark);
+}
+
+:root[data-theme="light"] .custom-option:hover {
+  background: rgba(35, 28, 54, 0.06);
+}
+
+:root[data-theme="light"] .custom-option.active {
+  color: #4a2a15;
+  background: linear-gradient(135deg, rgba(255, 138, 101, 0.22), rgba(255, 184, 107, 0.16));
+}
+
+:root[data-theme="light"] .modal-backdrop {
+  background: rgba(245, 241, 255, 0.64);
+}
+
+:root[data-theme="light"] .modal-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 246, 239, 0.98));
+  border-color: rgba(35, 28, 54, 0.1);
+  box-shadow: 0 28px 70px rgba(42, 36, 64, 0.18);
+}
+
+@media (max-width: 640px) {
+  .theme-toggle-btn {
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-actions {
+    padding-top: 42px;
+  }
+}
+
+/* V15: HP - theme button turun ke kanan bawah hero, tidak mepet teks/pojok */
+.hero-card {
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .hero-card {
+    position: relative;
+  }
+
+  .theme-toggle-btn {
+    top: auto !important;
+    right: 18px !important;
+    bottom: 18px !important;
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-actions,
+  :root[data-theme="light"] .hero-actions,
+  :root:not([data-theme="light"]) .hero-actions,
+  :root[data-theme="dark"] .hero-actions {
+    width: 100%;
+    padding-top: 0 !important;
+    padding-right: 58px;
+    align-items: flex-start;
+  }
+
+  .sync-badge {
+    max-width: 100%;
+  }
+}
+
+
+/* V16: light mode progress fix - progress kecil tetap kelihatan tapi soft */
+.progress-fill,
+.mini-progress div {
+  box-shadow: 0 0 14px rgba(255, 184, 107, 0.18);
+}
+
+.progress-fill.has-progress,
+.mini-progress div.has-progress {
+  min-width: 10px;
+}
+
+:root[data-theme="light"] .progress-bar,
+:root[data-theme="light"] .mini-progress {
+  background: rgba(33, 28, 46, 0.13);
+  border: 1px solid rgba(33, 28, 46, 0.055);
+}
+
+:root[data-theme="light"] .progress-fill,
+:root[data-theme="light"] .mini-progress div {
+  background: linear-gradient(90deg, #f08a4d 0%, #f5b45f 58%, #4fb982 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.42),
+    0 0 12px rgba(240, 138, 77, 0.18);
+}
+
+:root[data-theme="light"] .progress-meta,
+:root[data-theme="light"] #monthGoalText,
+:root[data-theme="light"] .month-numbers span,
+:root[data-theme="light"] .monthly-goal span {
+  color: #676174;
+}
+
+
+/* V17: mode switch lebih ringan */
+@media (max-width: 640px) {
+  .theme-toggle-btn {
+    transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease;
+  }
+
+  .theme-icon {
+    transition: opacity 120ms ease, transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+/* V18: transisi tema ringan tapi tetap kelihatan
+   Overlay warna lama akan fade out setelah tema baru dipasang. */
+.theme-fade-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 320ms ease;
+}
+
+.theme-fade-layer.is-leaving {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-fade-layer,
+  .theme-icon,
+  .theme-toggle-btn {
+    transition: none !important;
+  }
+}
+
+/* Light mode only: tombol delete dibuat lebih kelihatan.
+   Dark mode tidak diubah, tetap pakai style sebelumnya. */
+:root[data-theme="light"] .delete-btn {
+  color: #e3496b;
+  background: rgba(232, 76, 111, 0.14);
+  border: 1px solid rgba(232, 76, 111, 0.20);
+  box-shadow: 0 8px 18px rgba(232, 76, 111, 0.10);
+  opacity: 1;
+}
+
+:root[data-theme="light"] .delete-btn i {
+  color: inherit;
+}
+
+:root[data-theme="light"] .delete-btn:hover {
+  color: #ffffff;
+  background: #e84c6f;
+  box-shadow: 0 10px 22px rgba(232, 76, 111, 0.22);
+  transform: translateY(-1px);
+}
+
+/* Light mode: hilangkan efek bayangan card/UI.
+   Dark mode tetap memakai shadow seperti sebelumnya. */
+:root[data-theme="light"] {
+  --card-shadow: none;
+}
+
+:root[data-theme="light"] .glass-card,
+:root[data-theme="light"] .stat-card,
+:root[data-theme="light"] .login-card,
+:root[data-theme="light"] .modal-card,
+:root[data-theme="light"] .month-numbers div,
+:root[data-theme="light"] .monthly-goal,
+:root[data-theme="light"] .transaction-item,
+:root[data-theme="light"] .custom-select-menu {
+  box-shadow: none !important;
+}
+
+/* Hover light mode tetap bersih, tanpa shadow berlebihan */
+:root[data-theme="light"] .submit-btn:hover,
+:root[data-theme="light"] .delete-btn:hover,
+:root[data-theme="light"] .theme-toggle-btn:hover,
+:root[data-theme="light"] .magic-btn:hover {
+  box-shadow: none !important;
+}
+
+/* Light mode only: pill status target tetap ada, tapi background benar-benar transparan */
+:root[data-theme="light"] .primary-card .mini-pill,
+:root[data-theme="light"] #savingStatus {
+  background: rgba(0, 0, 0, 0) !important;
+  border-color: rgba(0, 0, 0, 0) !important;
+  box-shadow: none !important;
+  color: rgba(31, 21, 15, 0.92) !important;
+}
+
+/* Restore warna toggle Pemasukan / Pengeluaran seperti versi awal */
+.type-toggle {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: none !important;
+}
+
+.type-toggle::before {
+  background: linear-gradient(135deg, var(--accent), #d7ffe4) !important;
+  box-shadow: 0 10px 24px rgba(126, 230, 178, 0.22) !important;
+}
+
+.type-toggle.expense-selected::before {
+  background: linear-gradient(135deg, var(--danger), #ffccd8) !important;
+  box-shadow: 0 10px 24px rgba(255, 107, 138, 0.24) !important;
+}
+
+.type-toggle button {
+  color: var(--text-muted) !important;
+}
+
+.type-toggle button:hover {
+  color: var(--text-dark) !important;
+}
+
+.type-toggle button.active {
+  color: #172017 !important;
+}
+
+/* Light mode: warna toggle dibuat soft dan nyambung dengan tema.
+   Dark mode tetap pakai warna toggle original di atas. */
+:root[data-theme="light"] .type-toggle {
+  background: rgba(36, 30, 48, 0.055) !important;
+  border: 1px solid rgba(36, 30, 48, 0.075) !important;
+}
+
+:root[data-theme="light"] .type-toggle::before {
+  background: linear-gradient(135deg, #60c98d 0%, #bdf0cd 100%) !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .type-toggle.expense-selected::before {
+  background: linear-gradient(135deg, #ea6f86 0%, #ffd1da 100%) !important;
+  box-shadow: none !important;
+}
+
+:root[data-theme="light"] .type-toggle button {
+  color: rgba(41, 35, 55, 0.62) !important;
+}
+
+:root[data-theme="light"] .type-toggle button:hover {
+  color: rgba(31, 25, 43, 0.86) !important;
+}
+
+:root[data-theme="light"] .type-toggle button.active {
+  color: #17311f !important;
+}
+
+:root[data-theme="light"] .type-toggle.expense-selected button.active {
+  color: #35151d !important;
+}
+
