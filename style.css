@@ -610,11 +610,9 @@ input[type="month"] {
   z-index: 2;
 }
 
-/* Saat dropdown dibuka, form naik ke layer paling atas supaya popup nggak ketimpa card lain. */
 .form-card:has(.custom-select.open) {
   z-index: 100;
 }
-
 
 .form-card.dropdown-active {
   z-index: 100;
@@ -738,7 +736,6 @@ input[type="month"] {
   transition: opacity 0.22s ease, transform 0.22s ease;
   z-index: 9999;
 
-  /* Yang kelihatan kira-kira 6 pilihan, sisanya scroll di dalam popup. */
   max-height: 304px;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -1175,7 +1172,6 @@ input[type="month"] {
   }
 }
 
-/* Fix mobile scroll janky / putih pas scroll cepat */
 html,
 body {
   background-color: #101018;
@@ -1235,14 +1231,12 @@ body {
   }
 }
 
-/* Hard fix: jangan sampai layout melebar di HP */
 html,
 body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
-
 
 img,
 svg,
@@ -1340,7 +1334,6 @@ video {
   }
 }
 
-/* V10 emergency fix: HP harus bisa scroll vertikal, tapi tetap tidak melebar */
 html {
   width: 100%;
   max-width: 100%;
@@ -1413,8 +1406,6 @@ body {
   }
 }
 
-/* V11 fix: form Tambah Catatan jangan jadi area scroll.
-   Yang boleh scroll cuma popup kategori. */
 #transactionForm,
 .form-card,
 .form-card.glass-card,
@@ -1453,7 +1444,6 @@ body {
   }
 }
 
-/* V12: anti select / anti long press / anti drag di HP */
 html,
 body {
   -webkit-touch-callout: none;
@@ -1496,14 +1486,11 @@ a,
   -webkit-touch-callout: none;
 }
 
-/* Input tetap bisa diketik, tapi tap highlight biru tetap hilang */
 input,
 textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-
-/* Theme mode: satu tombol, transisi lembut biar tidak bikin mata capek */
 :root {
   color-scheme: dark;
 }
@@ -1529,10 +1516,6 @@ textarea {
   --surface-2: rgba(35, 28, 54, 0.085);
 }
 
-/* Theme performance fix:
-   Jangan transisi semua card/input saat ganti tema.
-   Di HP/PC ini bisa bikin repaint berat karena glass, shadow, dan background gradient.
-   Yang dianimasikan cukup tombol + ikon tema saja. */
 .theme-toggle-btn {
   transition:
     background-color 160ms ease,
@@ -1765,7 +1748,6 @@ textarea {
   }
 }
 
-/* V15: HP - theme button turun ke kanan bawah hero, tidak mepet teks/pojok */
 .hero-card {
   position: relative;
 }
@@ -1798,8 +1780,6 @@ textarea {
   }
 }
 
-
-/* V16: light mode progress fix - progress kecil tetap kelihatan tapi soft */
 .progress-fill,
 .mini-progress div {
   box-shadow: 0 0 14px rgba(255, 184, 107, 0.18);
@@ -1831,8 +1811,6 @@ textarea {
   color: #676174;
 }
 
-
-/* V17: mode switch lebih ringan */
 @media (max-width: 640px) {
   .theme-toggle-btn {
     transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease, transform 120ms ease;
@@ -1843,8 +1821,6 @@ textarea {
   }
 }
 
-/* V18: transisi tema ringan tapi tetap kelihatan
-   Overlay warna lama akan fade out setelah tema baru dipasang. */
 .theme-fade-layer {
   position: fixed;
   inset: 0;
@@ -1866,8 +1842,6 @@ textarea {
   }
 }
 
-/* Light mode only: tombol delete dibuat lebih kelihatan.
-   Dark mode tidak diubah, tetap pakai style sebelumnya. */
 :root[data-theme="light"] .delete-btn {
   color: #e3496b;
   background: rgba(232, 76, 111, 0.14);
@@ -1887,8 +1861,6 @@ textarea {
   transform: translateY(-1px);
 }
 
-/* Light mode: hilangkan efek bayangan card/UI.
-   Dark mode tetap memakai shadow seperti sebelumnya. */
 :root[data-theme="light"] {
   --card-shadow: none;
 }
@@ -1904,7 +1876,6 @@ textarea {
   box-shadow: none !important;
 }
 
-/* Hover light mode tetap bersih, tanpa shadow berlebihan */
 :root[data-theme="light"] .submit-btn:hover,
 :root[data-theme="light"] .delete-btn:hover,
 :root[data-theme="light"] .theme-toggle-btn:hover,
@@ -1912,7 +1883,6 @@ textarea {
   box-shadow: none !important;
 }
 
-/* Light mode only: pill status target tetap ada, tapi background benar-benar transparan */
 :root[data-theme="light"] .primary-card .mini-pill,
 :root[data-theme="light"] #savingStatus {
   background: rgba(0, 0, 0, 0) !important;
@@ -1921,7 +1891,6 @@ textarea {
   color: rgba(31, 21, 15, 0.92) !important;
 }
 
-/* Restore warna toggle Pemasukan / Pengeluaran seperti versi awal */
 .type-toggle {
   background: rgba(255, 255, 255, 0.06) !important;
   border: none !important;
@@ -1949,8 +1918,6 @@ textarea {
   color: #172017 !important;
 }
 
-/* Light mode: warna toggle dibuat soft dan nyambung dengan tema.
-   Dark mode tetap pakai warna toggle original di atas. */
 :root[data-theme="light"] .type-toggle {
   background: rgba(36, 30, 48, 0.055) !important;
   border: 1px solid rgba(36, 30, 48, 0.075) !important;
@@ -1981,4 +1948,3 @@ textarea {
 :root[data-theme="light"] .type-toggle.expense-selected button.active {
   color: #35151d !important;
 }
-
