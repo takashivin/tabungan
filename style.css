@@ -1948,3 +1948,51 @@ textarea {
 :root[data-theme="light"] .type-toggle.expense-selected button.active {
   color: #35151d !important;
 }
+
+:root[data-theme="light"] .modal-badge {
+  color: #e66b87 !important;
+  background: rgba(232, 76, 111, 0.10) !important;
+  border: 1px solid rgba(232, 76, 111, 0.18) !important;
+}
+:root[data-theme="light"] .modal-badge i {
+  color: #e66b87 !important;
+}
+
+:root[data-theme="light"] .transaction-list {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  contain: layout paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+:root[data-theme="light"] .transaction-item {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint;
+}
+
+:root[data-theme="light"] .list-card {
+  align-self: start;
+  transform: translateZ(0);
+}
+
+:root[data-theme="light"] .glass-card,
+:root[data-theme="light"] .stat-card {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+:root[data-theme="light"] .list-grid {
+  align-items: stretch;
+}
+
+:root[data-theme="light"] .list-card {
+  align-self: stretch;
+  height: 100%;
+  transform: translateZ(0);
+}
