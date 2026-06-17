@@ -36,6 +36,8 @@ const el = {
   progressTitle: document.querySelector("#progressTitle"),
   remainingText: document.querySelector("#remainingText"),
   progressFill: document.querySelector("#progressFill"),
+  heroTargetAmount: document.querySelector("#heroTargetAmount"),
+  progressTargetAmount: document.querySelector("#progressTargetAmount"),
 
   transactionForm: document.querySelector("#transactionForm"),
   formTitle: document.querySelector("#formTitle"),
@@ -139,6 +141,18 @@ function setMessage(target, message, isError = false) {
   target.style.color = isError ? "#ff9bb0" : "";
 }
 
+function renderConfigText() {
+  const targetText = formatRupiah(CONFIG.targetAmount);
+
+  if (el.heroTargetAmount) {
+    el.heroTargetAmount.textContent = targetText;
+  }
+
+  if (el.progressTargetAmount) {
+    el.progressTargetAmount.textContent = targetText;
+  }
+}
+
 function normalizeTransaction(row) {
   return {
     id: row.id,
@@ -152,6 +166,7 @@ function normalizeTransaction(row) {
 }
 
 async function init() {
+  renderConfigText();
   el.trxDate.value = todayISO();
   el.monthFilter.value = currentMonthISO();
   if (el.logoutBtn) el.logoutBtn.classList.add("hidden");
@@ -595,7 +610,6 @@ function clearSavedThemePreference() {
   try {
     localStorage.removeItem(themeStorageKey);
   } catch (error) {
-    // localStorage bisa saja diblokir browser; tema tetap jalan.
   }
 }
 
@@ -614,8 +628,6 @@ function getThemeBaseColor(theme) {
 }
 
 function runThemeFade(fromTheme) {
-  // Transisi ringan: bukan animasi semua card, tapi overlay warna lama yang fade out.
-  // Jadi tetap terasa smooth, tapi tidak bikin repaint berat di HP/PC.
   const oldLayer = document.querySelector(".theme-fade-layer");
   if (oldLayer) oldLayer.remove();
 
@@ -642,8 +654,6 @@ function applyTheme(theme, shouldSave = false, withFade = false) {
     runThemeFade(currentTheme);
   }
 
-  // Matikan transisi besar sebentar saat warna UI diganti.
-  // Yang terlihat transisi cuma overlay halus + ikon tema.
   root.classList.add("theme-changing");
   root.dataset.theme = nextTheme;
 
@@ -665,8 +675,6 @@ function initTheme() {
     el.themeToggle.addEventListener("click", () => {
       const currentTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
 
-      // Toggle manual hanya berlaku selama halaman ini dibuka.
-      // Setelah refresh / buka ulang, tema balik ngikut device preference.
       applyTheme(currentTheme === "dark" ? "light" : "dark", false, true);
     });
   }
