@@ -1,5 +1,5 @@
 const CONFIG = {
-  targetAmount: 8100000,
+  targetAmount: 10300000,
   monthlySaving: 500000,
   supabaseUrl: "https://ggjmxzeuzcrkobfzkhgy.supabase.co",
   supabaseAnonKey: "sb_publishable_-j4pRJs6YWWFfNG7shEeEg_zb5wGzZX",
