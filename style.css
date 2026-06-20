@@ -2014,19 +2014,6 @@ textarea {
   border-color: rgba(255, 255, 255, 0.16);
 }
 
-.creator-credit {
-  margin: 6px 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.28em;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-}
-
 .creator-credit a {
   color: var(--primary-2);
   text-decoration: none;
@@ -2043,4 +2030,18 @@ textarea {
 
 :root[data-theme="light"] .creator-credit a {
   color: #d9773f;
+}
+
+.creator-credit {
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28em;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transform: translateY(18px);
 }
