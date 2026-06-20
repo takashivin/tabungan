@@ -1827,7 +1827,7 @@ textarea {
   z-index: 99999;
   pointer-events: none;
   opacity: 1;
-  transition: opacity 320ms ease;
+  transition: opacity 400ms ease;
 }
 
 .theme-fade-layer.is-leaving {
@@ -1995,4 +1995,21 @@ textarea {
   align-self: stretch;
   height: 100%;
   transform: translateZ(0);
+}
+
+:root[data-theme="light"] .modal-btn.ghost {
+  color: #211c2e;
+  background: rgba(35, 28, 54, 0.035);
+  border: 1px solid rgba(35, 28, 54, 0.22);
+  box-shadow: none;
+}
+
+:root[data-theme="light"] .modal-btn.ghost:hover {
+  background: rgba(35, 28, 54, 0.075);
+  border-color: rgba(35, 28, 54, 0.32);
+}
+
+:root[data-theme="dark"] .modal-btn.ghost,
+:root:not([data-theme="light"]) .modal-btn.ghost {
+  border-color: rgba(255, 255, 255, 0.16);
 }

@@ -642,7 +642,7 @@ function runThemeFade(fromTheme) {
 
   window.setTimeout(() => {
     layer.remove();
-  }, 360);
+  }, 450);
 }
 
 function applyTheme(theme, shouldSave = false, withFade = false) {
@@ -660,7 +660,7 @@ function applyTheme(theme, shouldSave = false, withFade = false) {
   clearTimeout(themeChangeTimer);
   themeChangeTimer = setTimeout(() => {
     root.classList.remove("theme-changing");
-  }, 90);
+  }, 115);
 
   updateThemeButton(nextTheme);
 }
