@@ -2015,11 +2015,11 @@ textarea {
 }
 
 .creator-credit {
-  min-height: 96px;
-  margin: -4px 0 0;
+  margin: 6px 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.28em;
   text-align: center;
   color: var(--text-muted);
   font-size: 0.92rem;
